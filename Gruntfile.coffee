@@ -27,7 +27,7 @@ module.exports = (grunt) ->
         ]
         tasks: ['less']
       livereload:
-        files: ['dist/**/*.css', 'dist/**/*.js']
+        files: ['dist/**/*.css']
         options:
           livereload: true
     hogan:
@@ -47,7 +47,8 @@ module.exports = (grunt) ->
     less:
       main:
         files:
-          'dist/main.css': 'src/stylesheets/**/*.less'
+          'dist/main.css': 'src/stylesheets/main.less'
+          'dist/demo.css': 'src/stylesheets/demo.less'
     browserify:
       demo:
         src: 'src/scripts/demo.coffee'
