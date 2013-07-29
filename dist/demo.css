@@ -198,3 +198,9 @@
   border-collapse: collapse;
   padding: 2px 5px;
 }
+.reportView .demo .axis path,
+.reportView .demo .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
