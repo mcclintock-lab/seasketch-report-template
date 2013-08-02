@@ -10,7 +10,8 @@
     "grunt-contrib-hogan": "~0.2.2",
     "grunt-contrib-less": "~0.6.4",
     "bootstrap": "git://github.com/twitter/bootstrap.git",
-    "d3": "~3.2.7"
+    "d3": "~3.2.7",
+    "grunt-notify": "~0.2.7"
   },
   "scripts": {
     "preinstall": "npm install -g grunt"
