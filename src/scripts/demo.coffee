@@ -1,6 +1,7 @@
 GenericAttributesTab = require '../../lib/scripts/genericAttributesTab.coffee'
 DemoTab = require '../../lib/scripts/demoTab.coffee'
 
-window.app.addReports [GenericAttributesTab, DemoTab]
-# path must be relative to dist/
-window.app.addReportStylesheet './demo.css'
+window.app.registerReport (report) ->
+  report.tabs [GenericAttributesTab, DemoTab]
+  # path must be relative to dist/
+  report.stylesheets ['./demo.css']

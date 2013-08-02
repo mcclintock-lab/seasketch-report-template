@@ -65,6 +65,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-browserify')
   grunt.loadNpmTasks('grunt-contrib-hogan')
   grunt.loadNpmTasks('grunt-contrib-less')
-
+  grunt.loadNpmTasks('grunt-notify')
+  
   # Default task(s).
   grunt.registerTask('default', ['less', 'hogan', 'browserify'])
