@@ -32,8 +32,8 @@ module.exports = (grunt) ->
           livereload: true
     hogan:
       main:
-        src: 'src/templates/templates.js'
-        dest: 'src/templates/**/*.mustache'
+        dest: 'src/templates/templates.js'
+        src: 'src/templates/**/*.mustache'
       lib:
         dest: 'lib/templates/templates.js'
         src: 'lib/templates/**/*.mustache'
