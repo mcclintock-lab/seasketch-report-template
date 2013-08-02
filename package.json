@@ -9,7 +9,7 @@
     "coffeeify": "~0.5.1",
     "grunt-contrib-hogan": "~0.2.2",
     "grunt-contrib-less": "~0.6.4",
-    "bootstrap": "git://github.com/twitter/bootstrap.git",
+    "bootstrap": "git://github.com/twbs/bootstrap.git",
     "d3": "~3.2.7",
     "grunt-notify": "~0.2.7"
   },
