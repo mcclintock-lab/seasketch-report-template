@@ -169,6 +169,10 @@
   padding: 10px 0;
   margin: 0;
 }
+.reportView .reportSection p.large {
+  font-size: 15px;
+  line-height: 19px;
+}
 .reportView .reportSection table {
   width: 100%;
   border: 1px solid #e1e1e1;
@@ -197,6 +201,24 @@
   border: 1px solid #f3f3f3;
   border-collapse: collapse;
   padding: 2px 5px;
+}
+.reportView a[data-toggle-node] {
+  text-decoration: none;
+  position: relative;
+  margin-left: 16px;
+}
+.reportView a[data-toggle-node][data-not-found=true] {
+  color: red;
+}
+.reportView a[data-toggle-node]:before {
+  font-family: 'fontello';
+  position: absolute;
+  left: -16px;
+  top: 0px;
+  content: '';
+}
+.reportView a[data-toggle-node][data-visible=true]:before {
+  content: '☑';
 }
 .reportView .demo .axis path,
 .reportView .demo .axis line {
