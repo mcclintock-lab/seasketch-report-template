@@ -11,12 +11,12 @@ module.exports = (grunt) ->
           keepalive: true
     watch:
       scripts:
-        files: ['./src/scripts/**/*.coffee', './lib/scripts/**/*.coffee']
+        files: ['src/scripts/**/*.coffee', 'lib/scripts/**/*.coffee']
         tasks: ['browserify']
       templates:
         files: [
-          './src/templates/**/*.mustache'
-          './lib/templates/**/*.mustache'
+          'src/templates/**/*.mustache'
+          'lib/templates/**/*.mustache'
         ]
         tasks: ['hogan', 'browserify']
       stylesheets:
