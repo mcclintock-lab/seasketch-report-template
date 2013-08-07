@@ -5,7 +5,6 @@ module.exports = (el) ->
   unless toc
     console.log 'No table of contents found'
     return
-  console.log 'enable togglers', $el[0]
   togglers = $el.find('a[data-toggle-node]')
   # Set initial state
   for toggler in togglers.toArray()
@@ -14,7 +13,6 @@ module.exports = (el) ->
     try
       view = toc.getChildViewById nodeid
       node = view.model
-      console.log 'view, node', view, node
       $toggler.attr 'data-visible', !!node.get('visible')
       $toggler.data 'tocItem', view
     catch e
