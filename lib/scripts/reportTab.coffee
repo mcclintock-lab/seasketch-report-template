@@ -27,4 +27,24 @@ class ReportTab extends Backbone.View
   
   onLoading: () -> # extension point for subclasses
 
+  getResult: (id) ->
+    results = @getResults()
+    result = _.find results, (r) -> r.paramName is id
+    unless result?
+      throw new Error('No result with id ' + id)
+    result.value
+
+  getFirstResult: (param, id) ->
+    result = @getResult(param)
+    try
+      return result[0].features[0].attributes[id]
+    catch e
+      throw "Error finding #{param}:#{id} in gp results"
+
+  getResults: () ->
+    unless results = @results?.get('data')?.results
+      throw new Error('No gp results')
+    _.filter results, (result) ->
+      result.paramName not in ['ResultCode', 'ResultMsg']
+
 module.exports = ReportTab
