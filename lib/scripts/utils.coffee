@@ -4,4 +4,4 @@ module.exports =
     unless _.isNumber number
       number = parseFloat(number)
     multiplier = Math.pow 10, decimalPlaces
-    (Math.round(number * multiplier) / multiplier
+    Math.round(number * multiplier) / multiplier
