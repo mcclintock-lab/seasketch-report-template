@@ -1,6 +1,6 @@
-ReportTab = require './reportTab.coffee'
+ReportTab = require 'reportTab'
 templates = require '../templates/templates.js'
-d3 = require '../../node_modules/d3/index-browserify.js'
+d3 = window.d3
 
 class DemoTab extends ReportTab
   name: 'Examples'
@@ -19,13 +19,12 @@ class DemoTab extends ReportTab
       attributes: @model.getAttributes()
       admin: @project.isAdmin window.user
       chartData: _.map data, (d, i) -> {index: i, value: d}
+    
     @$el.html @template.render(context, templates)
 
     # Setup bootstrap tabs
-    $('#myTab a').click (e) ->
-      e.preventDefault()
-      $(this).tab('show')
-    $('#tabs2 a').click (e) ->
+    @$('#tabs2 a').click (e) ->
+      console.log 'tab click'
       e.preventDefault()
       $(this).tab('show')
 
@@ -33,7 +32,9 @@ class DemoTab extends ReportTab
     @drawChart(data)
 
   drawChart: (data) ->
+    console.log 'draw chart'
     p = @$('#chart p')
+    console.log 'p', p.length, @el
     margin = 
       top: 20
       right: 20
@@ -59,7 +60,7 @@ class DemoTab extends ReportTab
       .scale(y)
       .orient "left"
 
-    svg = d3.select("#chart").append("svg")
+    svg = d3.select(@$("#chart")[0]).append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
