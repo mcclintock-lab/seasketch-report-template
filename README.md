@@ -64,3 +64,12 @@ class OverviewTab extends ReportTab
 In this case the OverviewTab requires a geoprocessing service named SizeStats to be run, and will throw a timeout error after 15 seconds (the default is 10s). SizeStats refers to an "AnalyticalService" added to the SketchClass configuration via the admin interface. A named id is used rather than the url of the service so that geoprocessing services can be re-deployed to other locations without requiring code changes. Example of how a service can be configured in SeaSketch:
 
 ![](https://s3.amazonaws.com/SeaSketch/sizestats.png)
+
+#### LiveReload
+
+When running `grunt watch` it can act as a [LiveReload](http://livereload.com/) server for stylesheets. With the LiveReload browser extension installed, changes to report css will update in the browser without requiring browser reloads.
+
+#### D3 Visualizations
+
+[D3](http://d3js.org/) is a fantastic way to make interactive visualizations, and the only such library included in SeaSketch by default. Unfortunately it is not compatible with IE8. Develop visualizations for modern browsers and provide a table-based fallback for all others. The demo tab under `script/tab.coffee` and `templates/demo.mustache` has an example of how to use conditional statements in your html and test for the presence of d3 to alert the user when visualizations aren't available for their browser.
+
