@@ -44,6 +44,17 @@ Instruct SeaSketch to load `http://localhost:8080/report.js`. Load the report ag
 
 Report implementations are simply Javascript, HTML, and CSS code, and the code framework is quite minimal and in flux. The best way to get up to speed is to just dive into the demo and other reporting modules hosted under the mcclintock-lab github organization. Keep the following in mind while developing new reports:
 
+### New Reports must be Audited!
+
+Reporting modules are not sandboxed in any way, and represent a very serious security and reliability issue. 
+All new reports must be audited by either Chad or Todd before they are published in the mcclintock-lab
+organization and loaded on SeaSketch. In no case should 3rd party code be incorporated within SeaSketch without
+extensive testing and line-by-line audits.
+
+### Update the README's
+
+We don't want our github org littered with duplicates of this README.md file.
+
 ### Registering tabs
 
 `scripts/reports.coffee` contains an example that loads a single tab and single stylesheet. Stylesheets are loaded "globally", so it's up to the author to make sure all selectors are scoped to the appropriate tabs. The `report.tabs` method can register multiple tabs that should be associated with a SketchClass.
