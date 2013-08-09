@@ -34,4 +34,6 @@ Open a new terminal, and run `grunt connect`. Then in another terminal, run `gru
 
 Now that you are hosting this demo module locally you can configure SeaSketch to use it. Each SketchClass supports a the addition of client reporting module urls. For debugging purposes, you can load a reporting module url for any SketchClass as part of your temporary browser session. This means you can just go to the relevant SeaSketch project on the production site, and load and view development code hosted on your local machine.
 
-To do so first open the attributes/report for your SketchClass of interest, click on the gear icon, and choose _load report code_.
+To do so first open the attributes/report for your SketchClass of interest, click on the gear icon, and choose _load report client code_.
+
+![](//Screen%20Shot%202013-08-09%20at%202.34.13%20PM.png)
