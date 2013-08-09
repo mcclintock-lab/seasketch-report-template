@@ -36,4 +36,4 @@ Now that you are hosting this demo module locally you can configure SeaSketch to
 
 To do so first open the attributes/report for your SketchClass of interest, click on the gear icon, and choose _load report client code_.
 
-![](//Screen%20Shot%202013-08-09%20at%202.34.13%20PM.png)
+![](https://s3.amazonaws.com/SeaSketch/load_client_report.png)
