@@ -6,31 +6,32 @@ on arcgis server. These services accept a "Sketch" or "SketchCollection" and out
 analysis on those feature(s). The second component is that used to visualize the output of these services.
 These "Client Reporting Modules" can depend on the output of zero, one, or many geoprocessing services and
 present user-friendly representations of the output. This repository is a template from which all client 
-reporting modules shoudl be based on.
+reporting modules should be based on.
 
-## Steps to creating and deploying a Report
+## Creating a new Client Reporting Module
 
-  1. Fork the seasketch-report-template repository
-  2. Install the source code for this fork locally
-  3. Use grunt to host the reporting module locally 
-  4. Configure the SketchClass of interest to load your locally hosted fork
-  5. Modify the reporting code to meet the project's needs
-  6. Ask a SeaSketch team member to fork your repository within the mcclintock-lab organization
-  7. Update the SketchClass settings within the admin interface to point at the report code hosted on mcclintock-lab.github.io
-  8. As updates to the reporting modules are needed, send pull requests to the fork hosted on mcclintock-lab
+First clone this template repository. Just run the following commands to clone
+this repo locally, and install all it's dependencies.
 
-## Fork the repository
+```
+git clone git@github.com:mcclintock-lab/seasketch-report-template.git
+cd seasketch-report-template
+npm install
+```
 
-## Install the source code locally
+Included in the dependencies is [the SeaSketch reporting api library](https://github.com/mcclintock-lab/seasketch-reporting-api). This libary 
+contains the base `ReportTab` class from which all report code is based.
 
-## Use grunt to host the reporting module locally
+## Loading your locally-hosted module
 
-## Configure the SketchClass of intereset to load the locally hosted fork
+### Running a local server and compiling the module
 
-## Modify the reporting code to meet the project's needs
+You'll want to test your reporting module code within SeaSketch as you work. To do so, let startup a local server to host this module and startup a daemon that will compile changes to source files as they are modified.
 
-## Ask a SeaSketch team member to fork your repository within the mcclintock-lab organization
+Open a new terminal, and run `grunt connect`. Then in another terminal, run `grunt watch`. This will start a local server at `http://localhost:8080/` which makes accessible every file under `dist/`. `grunt watch` will watch all source files and recompile them for hosting under `dist/`. All grunt-related commands are configured via `Gruntfile.coffee`. If you need to manually compile the javascript and stylesheet files within dist, simple run `grunt` without any arguments.
 
-## Update the SketchClass settings within the admin interface to point at the report code hosted on mcclintock-lab.github.io
+### Configuring Seasketch
 
-## As updates to the reporting modules are needed, send pull requests to the fork hosted on mcclintock-lab
+Now that you are hosting this demo module locally you can configure SeaSketch to use it. Each SketchClass supports a the addition of client reporting module urls. For debugging purposes, you can load a reporting module url for any SketchClass as part of your temporary browser session. This means you can just go to the relevant SeaSketch project on the production site, and load and view development code hosted on your local machine.
+
+To do so first open the attributes/report for your SketchClass of interest, click on the gear icon, and choose _load report code_.
