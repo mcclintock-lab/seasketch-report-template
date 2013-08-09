@@ -20,10 +20,10 @@ module.exports = (el) ->
 
   togglers.on 'click', (e) ->
     e.preventDefault()
-    $el = $(@)
+    $el = $(e.target)
     view = $el.data('tocItem')
     if view
       view.toggleVisibility(e)
-      $toggler.attr 'data-visible', !!view.model.get('visible')
+      $el.attr 'data-visible', !!view.model.get('visible')
     else
       alert "Layer not found in the current Table of Contents. \nExpected nodeid #{$el.data('toggle-node')}"
