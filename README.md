@@ -28,7 +28,7 @@ contains the base `ReportTab` class from which all report code is based.
 
 You'll want to test your reporting module code within SeaSketch as you work. To do so, let startup a local server to host this module and startup a daemon that will compile changes to source files as they are modified.
 
-Open a new terminal, and run `grunt connect`. Then in another terminal, run `grunt watch`. This will start a local server at `http://localhost:8080/` which makes accessible every file under `dist/`. `grunt watch` will watch all source files and recompile them for hosting under `dist/`. All grunt-related commands are configured via `Gruntfile.coffee`. If you need to manually compile the javascript and stylesheet files within dist, simple run `grunt` without any arguments.
+Open a new terminal, and run `grunt connect`. Then in another terminal, run `grunt watch`. This will start a local server at `http://localhost:8080/` which makes accessible every file under `dist/`. `grunt watch` will watch all source files and recompile them for hosting under `dist/`. All grunt-related commands are configured via `Gruntfile.coffee`. See [the Grunt docs](http://gruntjs.com/) for more info on how to use this file. Just think of it as a webapp-focused Makefile. If you need to manually compile the javascript and stylesheet files within dist, simple run `grunt` without any arguments.
 
 ### Configuring Seasketch
 
