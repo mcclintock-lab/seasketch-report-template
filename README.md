@@ -65,11 +65,78 @@ In this case the OverviewTab requires a geoprocessing service named SizeStats to
 
 ![](https://s3.amazonaws.com/SeaSketch/sizestats.png)
 
+All data from these geoprocessing scripts will be available as an instance variable `@results` within the ReportTab implementation. ReportTab also has shortcut methods to get at some of this data more easily.
+
 #### LiveReload
 
 When running `grunt watch` it can act as a [LiveReload](http://livereload.com/) server for stylesheets. With the LiveReload browser extension installed, changes to report css will update in the browser without requiring browser reloads.
 
 #### D3 Visualizations
 
-[D3](http://d3js.org/) is a fantastic way to make interactive visualizations, and the only such library included in SeaSketch by default. Unfortunately it is not compatible with IE8. Develop visualizations for modern browsers and provide a table-based fallback for all others. The demo tab under `script/tab.coffee` and `templates/demo.mustache` has an example of how to use conditional statements in your html and test for the presence of d3 to alert the user when visualizations aren't available for their browser.
+[D3](http://d3js.org/) is a fantastic way to make interactive visualizations, and the only such library included in SeaSketch by default (via `window.d3`). It is not compatible with IE8. Develop visualizations for modern browsers and provide a table-based fallback for all others. The demo tab under `script/tab.coffee` and `templates/demo.mustache` has an example of how to use conditional statements in your html and test for the presence of d3 to alert the user when visualizations aren't available for their browser.
 
+#### Hosting more than one report module within a project
+
+This example template provides a single report (`dist/report.js`), but there is no reason a single project cannot contain multiple client reporting modules to support many different SketchClasses. In fact, this is a great approach since there is likely code that can be shared among reports for different SketchClasses within a project. To do this, just add new report registering scripts similar to `scripts/report.coffee` and configure `Gruntfile.coffee` to generate each.
+
+```coffee
+# you'll want to use more descriptive names...
+# scripts/report2.coffee
+InfoTab = require './infoTab.coffee'
+HabitatTab = require './habitatTab.coffee'
+
+window.app.registerReport (report) ->
+  report.tabs [InfoTab, HabitatTab]
+  report.stylesheets ['./report2.css']
+
+```
+
+```coffee
+# Gruntfile.coffee
+...
+  browserify:
+    report:
+      src: 'scripts/report.coffee'
+      dest: 'dist/report.js'
+    report2:
+      src: 'scripts/report2.coffee'
+      dest: 'dist/report2.js'
+    options:
+      transform: ['coffeeify']
+      debug: true
+      alias: [
+        'node_modules/seasketch-reporting-api/scripts/reportTab.coffee:reportTab'
+      ]
+```
+
+#### Making changes to seasketch-reporting-api
+
+If it's necessary to make changes to the base ReportTab or other library code within seasketch-reporting-api it will have to be committed to that repo. The easiest way to do this is to run `npm install` normally within your report project, then delete `node_modules/seasketch-reporting-api`. Within `node_modules`, then clone the seasketch-reporting-api project with r/w permissions, make changes and commit/push them up to the main repo. Make sure to tag new revisions using semantic versioning so that report modules can be tied to specific versions.
+
+## Publishing and Deploying new Client Reporting Modules
+### Creating a new Github repo
+First thing you will need to do is create a new github repository to host the new project. Create a brand-new repo under the mcclintock-lab organization, and make sure you choose to create it bare (no auto-generated README or .gitignore).
+
+If you have followed this README to here, the new reporting module is still attached to the seasketch-report-template repo, and you definitly should not push changes there. Remove the current git remote origin, add the new github repo as the target remote origin, and push all changes there.
+
+```
+git remote rm origin
+git remote add origin git@github.com:mcclintock-lab/<NEW-REPO-NAME>.git
+git push origin
+```
+
+#### Publishing via Github Pages
+Now that the client reporting code has a home, it needs to be hosted at a web accessible url so SeaSketch can load it. As a security precaution, SeaSketch can only be configured with reporting modules hosted via Github Pages under the mcclintock-lab organization. To start hosting new report code, run the following:
+
+```
+git checkout -b gh-pages
+git push origin
+```
+
+Code should then be avialable at `http://mcclintock-lab.github.io/<PROJECT-NAME>/dist/<REPORT-NAME>.js` within 10 minutes. Be sure when developing code to make sure you are on the `master` branch, then merge and push to the `gh-pages` branch when you want to go live with changes.
+
+#### Pointing SeaSketch at the new client reporting module
+
+Within the SketchClass admin interface of the project of interest, choose a SketchClass and go to the geoprocessing tab. **Make sure AnalyticalServices are configured that the reporting modules depends on**. There is a text box where the path to the registration script hosted on Github Pages can be pasted in. After that, the new report code is live.
+
+![](https://s3.amazonaws.com/SeaSketch/report-code-location.png)
