@@ -37,3 +37,30 @@ Now that you are hosting this demo module locally you can configure SeaSketch to
 To do so first open the attributes/report for your SketchClass of interest, click on the gear icon, and choose _load report client code_.
 
 ![](https://s3.amazonaws.com/SeaSketch/load_client_report.png)
+
+Instruct SeaSketch to load `http://localhost:8080/report.js`. Load the report again, and you should see the demo report tab, and the gear icon should turn red indicating you have a custom report loaded. Via the same context menu you can choose _clear report client code_ to reset to the default, or choose load again to reload this file without refreshing your browser.
+
+## Customizing your report
+
+Report implementations are simply Javascript, HTML, and CSS code, and the code framework is quite minimal and in flux. The best way to get up to speed is to just dive into the demo and other reporting modules hosted under the mcclintock-lab github organization. Keep the following in mind while developing new reports:
+
+### Registering tabs
+
+`scripts/reports.coffee` contains an example that loads a single tab and single stylesheet. Stylesheets are loaded "globally", so it's up to the author to make sure all selectors are scoped to the appropriate tabs. The `report.tabs` method can register multiple tabs that should be associated with a SketchClass.
+
+### Tab implementations
+
+`scripts/tab.coffee` contains an example tab. It subclasses `lib/reportTab` (as should all reports) and as a simple demo has no geoprocessing dependencies.
+
+### Defining geoprocessing service dependencies
+
+Most report tabs will require the results of one or more geoprocessing service runs. To specify needed data, add key properties to the reportTab implementation like so:
+```coffeescript
+class OverviewTab extends ReportTab
+  name: 'Overview'
+  dependencies: ['SizeStats']
+  timeout: 15000
+```
+In this case the OverviewTab requires a geoprocessing service named SizeStats to be run, and will throw a timeout error after 15 seconds (the default is 10s). SizeStats refers to an "AnalyticalService" added to the SketchClass configuration via the admin interface. A named id is used rather than the url of the service so that geoprocessing services can be re-deployed to other locations without requiring code changes. Example of how a service can be configured in SeaSketch:
+
+![](https://s3.amazonaws.com/SeaSketch/sizestats.png)
