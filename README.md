@@ -160,3 +160,52 @@ Code should then be avialable at `http://mcclintock-lab.github.io/<PROJECT-NAME>
 Within the SketchClass admin interface of the project of interest, choose a SketchClass and go to the geoprocessing tab. **Make sure AnalyticalServices are configured that the reporting modules depends on**. There is a text box where the path to the registration script hosted on Github Pages can be pasted in. After that, the new report code is live.
 
 ![](https://s3.amazonaws.com/SeaSketch/report-code-location.png)
+
+## Data Access within Reports
+
+Within tab implementations, you define dependencies you want to load like so:
+```coffeescript
+dependencies: [
+  'CommercialFishing'
+  'RecreationalFishing'
+  'CustomaryFishing'
+  'TotalFood'
+]
+```
+
+#### @recordSet(dependency, paramName, [optional sketchClassId])
+
+Within the tab, you have access to the `@recordSet` function to retrieve than information. To grab the recordSet for 
+commercial fishing, call it like so:
+
+```
+rs = @recordSet('CommercialFishing', 'fishing') # fishing is the paramName returned by the gp service.
+# not that I have that, I can get the attributes for all features as a set of rows like this:
+rs.toArray()
+> [{foo: 'bar'}, {foo: 'bar2'}] ...
+```
+
+If there are geoprocessing tasks that return a single feature in a single recordset, the `RecordSet` object that
+is returned has helper methods to coerce those values into something that can be displayed.
+
+For example, if we have a 'TargetSize' service in the dependencies:
+
+```
+HECTARES = @recordSet('TargetSize', 'TargetSize').float('SIZE_IN_HA')
+> 2.20
+# or with different precision
+HECTARES = @recordSet('TargetSize', 'TargetSize').float('SIZE_IN_HA', 4)
+> 2.2012
+```
+
+### RecordSet methods
+
+#### RecordSet.int(attr)
+
+Returns the integer form of the first feature in the first featureset of the recordset.
+
+#### RecordSet.float(attr, [num_decimal_places=2])
+Returns the float form of the first feature in the first featureset of the recordset.
+
+#### RecordSet.bool(attr)
+Returns the boolean form of the first feature in the first featureset of the recordset. Will coerce 'True' to `true`
