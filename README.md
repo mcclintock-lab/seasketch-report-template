@@ -209,3 +209,6 @@ Returns the float form of the first feature in the first featureset of the recor
 
 #### RecordSet.bool(attr)
 Returns the boolean form of the first feature in the first featureset of the recordset. Will coerce 'True' to `true`
+
+#### RecordSet.value
+Note that you can always grab the full featureSet json for a parameter returned by a GP Service with the `value` property.
