@@ -32,13 +32,22 @@ Open a new terminal, and run `grunt connect`. Then in another terminal, run `gru
 
 ### Configuring Seasketch
 
-Now that you are hosting this demo module locally you can configure SeaSketch to use it. Each SketchClass supports a the addition of client reporting module urls. For debugging purposes, you can load a reporting module url for any SketchClass as part of your temporary browser session. This means you can just go to the relevant SeaSketch project on the production site, and load and view development code hosted on your local machine.
+Now that you are hosting this demo module locally you can configure SeaSketch to use it. 
+Each SketchClass supports a the addition of client reporting module urls. For debugging purposes, 
+you can load a reporting module url for any SketchClass as part of your temporary browser session. 
+This means you can just go to the relevant SeaSketch project on the production site, and load and 
+view development code hosted on your local machine.
 
-To do so first open the attributes/report for your SketchClass of interest, click on the gear icon, and choose _load report client code_.
+To load a reporting module, open the chrome developer console, and run commands like so:
 
-![](https://s3.amazonaws.com/SeaSketch/load_client_report.png)
-
-Instruct SeaSketch to load `http://localhost:8080/report.js`. Load the report again, and you should see the demo report tab, and the gear icon should turn red indicating you have a custom report loaded. Via the same context menu you can choose _clear report client code_ to reset to the default, or choose load again to reload this file without refreshing your browser.
+```
+# load the locally hosted array.js to use for the sketchclass named Regional Plan
+app.debugReport('Regional Plan', 'http://localhost:8080/array.js')
+# load for another sketchclass
+app.debugReport('Protection Area', 'http://localhost:8080/protectionZone.js')
+# clear out any existing debugging reports:
+app.clearDebugReports()
+```
 
 ## Customizing your report
 
