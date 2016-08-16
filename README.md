@@ -142,7 +142,7 @@ If you have followed this README to here, the new reporting module is still atta
 ```
 git remote rm origin
 git remote add origin git@github.com:mcclintock-lab/<NEW-REPO-NAME>.git
-git push origin
+git push --set-upstream origin master
 ```
 
 #### Publishing via Github Pages
@@ -150,7 +150,7 @@ Now that the client reporting code has a home, it needs to be hosted at a web ac
 
 ```
 git checkout -b gh-pages
-git push origin
+git push --set-upstream origin gh-pages
 ```
 
 Code should then be avialable at `http://mcclintock-lab.github.io/<PROJECT-NAME>/dist/<REPORT-NAME>.js` within 10 minutes. Be sure when developing code to make sure you are on the `master` branch, then merge and push to the `gh-pages` branch when you want to go live with changes.
