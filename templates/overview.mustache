@@ -1,21 +1,19 @@
 
 <div class="reportSection">
-  <h4>Designated Areas</h4>
+  <h4>Areas</h4>
     <div class="tab-pane" id="dataTable">
       <table>
         <thead>
           <tr>
             <th>Name</th>
-            <th>Designate</th>
-            <th>IUCN Category</th>
+            <th>Area</th>
           </tr>
         </thead>
         <tbody>
           {{#areas}}
             <tr>
-              <td>{{SITE_NAME}}</td>
-              <td>{{DESIGNATE}}</td>
-              <td>{{IUCNCAT}}</td>
+              <td>{{NAME}}</td>
+              <td>{{AREA_SQKM}}</td>
             </tr>
           {{/areas}}
         </tbody>

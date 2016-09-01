@@ -12,11 +12,11 @@ class OverviewTab extends ReportTab
   className: 'overview'
   template: templates.overview
   dependencies: [
-    'DesignatedAreasToolbox'
+    'XXToolboxHereXX'
   ]
   render: () ->
     # pull data from GP script
-    areas = @recordSet('DesignatedAreasToolbox', 'DesignatedAreas').toArray()
+    areas = @recordSet('XXToolboxHereXX', 'XXReturnValsXX').toArray()
     # setup context object with data and render the template from it
     context =
       sketch: @model.forTemplate()
