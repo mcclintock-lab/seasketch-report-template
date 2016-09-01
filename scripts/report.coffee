@@ -1,6 +1,6 @@
-Tab = require './tab.coffee'
+OverviewTab = require './overview.coffee'
 
 window.app.registerReport (report) ->
-  report.tabs [Tab]
+  report.tabs [OverviewTab]
   # path must be relative to dist/
   report.stylesheets ['./report.css']
