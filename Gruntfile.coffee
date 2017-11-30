@@ -6,16 +6,20 @@ module.exports = (grunt) ->
     connect:
       server:
         options:
-          port: 8080
+          protocol: 'https', # or 'http2'
+          port: 8443,
+          key: grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/server.key').toString(),
+          cert: grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/server.crt').toString(),
+          ca: grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/ca.crt').toString()
           base: './dist'
           keepalive: true
     watch:
       scripts:
         files: [
-          'scripts/**/*.coffee', 
+          'scripts/**/*.coffee',
           'node_modules/seasketch-reporting-api/scripts/**/*.coffee'
         ]
-        tasks: ['browserify']
+        tasks: ['browserify'],
       templates:
         files: [
           'templates/**/*.mustache'
@@ -33,6 +37,9 @@ module.exports = (grunt) ->
         files: ['dist/**/*.css']
         options:
           livereload: true
+          key: grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/server.key').toString(),
+          cert: grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/server.crt').toString()
+
     hogan:
       main:
         dest: 'templates/templates.js'
@@ -42,7 +49,7 @@ module.exports = (grunt) ->
         src: 'node_modules/seasketch-reporting-api/templates/**/*.mustache'
       options:
         commonJsWrapper: true
-        defaultName: (filename) -> 
+        defaultName: (filename) ->
           filename
             .replace('templates/', '')
             .replace('node_modules/seasketch-reporting-api/templates/', '')
@@ -77,6 +84,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-contrib-hogan')
   grunt.loadNpmTasks('grunt-contrib-less')
   grunt.loadNpmTasks('grunt-notify')
-  
+
   # Default task(s).
   grunt.registerTask('default', ['less', 'hogan', 'browserify'])

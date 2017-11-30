@@ -2,16 +2,16 @@
   "name": "report-template",
   "version": "0.1.0",
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-connect": "~0.3.0",
-    "grunt-contrib-watch": "~0.5.1",
-    "grunt-browserify": "~1.2.0",
     "coffeeify": "~0.5.1",
+    "grunt": "^1.0.1",
+    "grunt-browserify": "~1.2.0",
+    "grunt-coffeeify": "~0.1.3",
+    "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-hogan": "~0.2.2",
     "grunt-contrib-less": "~0.6.4",
-    "seasketch-reporting-api": "git://github.com/mcclintock-lab/seasketch-reporting-api.git",
+    "grunt-contrib-watch": "~0.5.1",
     "grunt-notify": "~0.2.7",
-    "grunt-coffeeify": "~0.1.3"
+    "seasketch-reporting-api": "git://github.com/mcclintock-lab/seasketch-reporting-api.git"
   },
   "scripts": {
     "preinstall": "npm install -g grunt"
