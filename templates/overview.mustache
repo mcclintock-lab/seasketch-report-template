@@ -1,19 +1,19 @@
 
-<div class="reportSection">
-  <h4>Areas</h4>
+<div class="reportSection tableContainer">
+  <h4>Size</h4>
     <div class="tab-pane" id="dataTable">
       <table>
         <thead>
           <tr>
             <th>Name</th>
-            <th>Area</th>
+            <th>Area (Acres)</th>
           </tr>
         </thead>
         <tbody>
           {{#areas}}
             <tr>
-              <td>{{NAME}}</td>
-              <td>{{AREA_SQKM}}</td>
+              <td>{{Name}}</td>
+              <td>{{SizeAcres}}</td>
             </tr>
           {{/areas}}
         </tbody>
